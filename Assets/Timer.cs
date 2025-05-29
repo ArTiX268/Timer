@@ -155,7 +155,10 @@ public class Timer : MonoBehaviour
                     timerFinished = true;
 
                     if (_destroyedOnFinished)
+                    {
+                        timerFinished = true;
                         TimerManager.DestroyTimer(gameObject);
+                    }
                 }
 
                 if (_numberOfLoops > 0)
