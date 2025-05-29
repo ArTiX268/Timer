@@ -20,6 +20,9 @@ public class Timer : MonoBehaviour
 
     private void Update()
     {
+        if (timerFinished)
+            timerFinished = false;
+            
         if (!_fixedTimer)
         {
             if (_scaled)
@@ -31,6 +34,9 @@ public class Timer : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (timerFinished)
+            timerFinished = false;
+            
         if (_fixedTimer)
         {
             if (_scaled)
@@ -88,6 +94,7 @@ public class Timer : MonoBehaviour
     {
         currentTimer = 0;
         canUpdateTimer = false;
+        timerFinished = false;
     }
 
     public void RestartTimer()
@@ -101,6 +108,7 @@ public class Timer : MonoBehaviour
         ResetTimerValues();
         canUpdateTimer = false;
         currentTimer = 0;
+        timerFinished = false;
     }
 
     private void ResetTimerValues()
