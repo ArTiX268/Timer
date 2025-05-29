@@ -17,12 +17,18 @@ public class Timer : MonoBehaviour
     private bool _loopInfinitly = false;
     private bool _fixedTimer = false;
     private bool _destroyedOnFinished = false;
+    private bool _destroy = false;
 
     private void Update()
     {
         if (timerFinished)
             timerFinished = false;
-            
+
+
+        if (_destroy)
+            TimerManager.DestroyTimer(gameObject);
+
+
         if (!_fixedTimer)
         {
             if (_scaled)
@@ -36,7 +42,7 @@ public class Timer : MonoBehaviour
     {
         if (timerFinished)
             timerFinished = false;
-            
+
         if (_fixedTimer)
         {
             if (_scaled)
@@ -44,6 +50,10 @@ public class Timer : MonoBehaviour
             else
                 TimerLogic(Time.fixedUnscaledDeltaTime);
         }
+    }
+
+    private void LateUpdate()
+    {
     }
 
     public void InitializeValues(float duration, float timeBeforeStart = 0, int numberOfLoops = 0, bool destroyedOnFinished = true, bool scaled = true, bool loopInfinitly = false, bool fixedTimer = false)
@@ -89,6 +99,8 @@ public class Timer : MonoBehaviour
     public void PauseTimer() { canUpdateTimer = false; }
 
     public void ResumeTimer() { canUpdateTimer = true; }
+
+    public int GetNumberOfLoops() { return _numberOfLoops; }
 
     public void StopTimer()
     {
@@ -150,14 +162,13 @@ public class Timer : MonoBehaviour
             }
             else
             {
+                timerFinished = true;
+
                 if (_numberOfLoops == 0)
                 {
-                    timerFinished = true;
-
                     if (_destroyedOnFinished)
                     {
-                        timerFinished = false;
-                        TimerManager.DestroyTimer(gameObject);
+                        _destroy = true;
                     }
                 }
 
