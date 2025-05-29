@@ -42,7 +42,6 @@ public class Timer : MonoBehaviour
 
     public void InitializeValues(float duration, float timeBeforeStart = 0, int numberOfLoops = 0, bool destroyedOnFinished = true, bool scaled = true, bool loopInfinitly = false, bool fixedTimer = false)
     {
-        Debug.Log("It works");
         if (duration < 0)
         {
             Debug.LogError("Duration is negative. It has been set to 0 by default.");
