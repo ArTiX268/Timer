@@ -156,7 +156,7 @@ public class Timer : MonoBehaviour
 
                     if (_destroyedOnFinished)
                     {
-                        timerFinished = true;
+                        timerFinished = false;
                         TimerManager.DestroyTimer(gameObject);
                     }
                 }
